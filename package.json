@@ -1,0 +1,32 @@
+{
+  "name": "desktopprayertimes",
+  "version": "1.0.0",
+  "productName": "Desktop Prayer Times",
+  "description": "A small desktop app that displays the prayer times on your desktop so you have them at a glance",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron-forge start",
+    "dev": "nodemon --exec electron .",
+    "format": "npx prettier . --write",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "author": "Steven Santos",
+  "license": "MIT",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.5.0",
+    "@electron-forge/maker-deb": "^7.5.0",
+    "@electron-forge/maker-rpm": "^7.5.0",
+    "@electron-forge/maker-squirrel": "^7.5.0",
+    "@electron-forge/maker-zip": "^7.5.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
+    "@electron-forge/plugin-fuses": "^7.5.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^32.1.2",
+    "prettier": "3.3.3"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1"
+  }
+}
