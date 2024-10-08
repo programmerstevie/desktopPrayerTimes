@@ -12,7 +12,9 @@ const { ipcMain } = require("electron");
 const { nativeImage, Tray, Menu } = require("electron");
 
 // const trayIcon = nativeImage.createFromPath("./images/icon.ico");
-const appIcon = nativeImage.createFromPath("./images/icon.ico");
+const appIcon = nativeImage.createFromPath(
+  path.join(__dirname, "images", "icon.ico"),
+);
 
 const { getToday } = require("./utils");
 
@@ -50,9 +52,9 @@ const createWindow = () => {
   // mainWindow.webContents.openDevTools()
 };
 
-app.setLoginItemSettings({
-  openAtLogin: true,
-});
+// app.setLoginItemSettings({
+//   openAtLogin: true,
+// });
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -64,6 +66,7 @@ app.whenReady().then(() => {
   const contextMenu = Menu.buildFromTemplate([{ role: "quit" }]);
 
   tray.setContextMenu(contextMenu);
+  tray.setToolTip("Prayer Times");
 
   app.on("activate", () => {
     // On macOS it's common to re-create a window in the app when the
@@ -121,3 +124,15 @@ ipcMain.on("window-drag", (event, { action, x, y }) => {
     mainWindow.setPosition(currentX + x, currentY + y);
   }
 });
+
+ipcMain.on(
+  "currentPrayerTime",
+  (event, { name, displayNames, displayTimes }) => {
+    let toolTipTimes = "";
+    for (let i = 0; i < displayNames.length; i++) {
+      if (i > 0) toolTipTimes += "\n";
+      toolTipTimes += `${displayNames[i]} at ${displayTimes[i]}`;
+    }
+    tray.setToolTip(`Prayer Times \n${name}\n----\n${toolTipTimes}`);
+  },
+);

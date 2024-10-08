@@ -15,6 +15,15 @@ let indexBridge = {
   error: (msg) => {
     ipcRenderer.send("error", msg);
   },
+  /**
+   * @function setCurrentPrayerTime
+   * @param {string} name
+   * @param {string[]} displayNames
+   * @param {string[]} displayTimes
+   */
+  setCurrentPrayerTime: (name, displayNames, displayTimes) => {
+    ipcRenderer.send("currentPrayerTime", { name, displayNames, displayTimes });
+  },
 };
 
 contextBridge.exposeInMainWorld("indexBridge", indexBridge);
