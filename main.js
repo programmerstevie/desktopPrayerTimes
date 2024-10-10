@@ -38,7 +38,7 @@ const createWindow = () => {
       preload: path.join(__dirname, "preload", "preload.js"),
     },
     frame: false,
-    // resizable: false,
+    resizable: !app.isPackaged,
     alwaysOnTop: true,
     icon: appIcon,
     skipTaskbar: true,
@@ -52,9 +52,11 @@ const createWindow = () => {
   // mainWindow.webContents.openDevTools()
 };
 
-// app.setLoginItemSettings({
-//   openAtLogin: true,
-// });
+if (app.isPackaged) {
+  app.setLoginItemSettings({
+    openAtLogin: true,
+  });
+}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
