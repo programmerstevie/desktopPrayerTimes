@@ -46,7 +46,7 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile("./front/index.html");
+  mainWindow.loadFile(path.join(__dirname, "frontend", "index.html"));
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()

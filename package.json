@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "productName": "Desktop Prayer Times",
   "description": "A small desktop app that displays the prayer times on your desktop so you have them at a glance",
-  "main": "main.js",
+  "main": "src/main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
