@@ -13,7 +13,7 @@ const { nativeImage, Tray, Menu } = require("electron");
 
 // const trayIcon = nativeImage.createFromPath("./images/icon.ico");
 const appIcon = nativeImage.createFromPath(
-  path.join(__dirname, "images", "icon.ico"),
+  path.join(__dirname, "../images", "icon.ico"),
 );
 
 const { getToday } = require("./utils");
