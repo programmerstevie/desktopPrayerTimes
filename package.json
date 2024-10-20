@@ -7,7 +7,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
-    "dev": "nodemon --exec electron .",
+    "dev": "cross-env NODE_ENV=development vite",
+    "nodemon-dev": "nodemon --exec electron .",
     "format": "npx prettier . --write",
     "package": "electron-forge package",
     "make": "electron-forge make"
@@ -23,8 +24,15 @@
     "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
     "@electron-forge/plugin-fuses": "^7.5.0",
     "@electron/fuses": "^1.8.0",
+    "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
     "electron": "^32.1.2",
-    "prettier": "3.3.3"
+    "electron-reloader": "^1.2.3",
+    "postcss": "^8.4.47",
+    "prettier": "3.3.3",
+    "tailwindcss": "^3.4.14",
+    "vite": "^5.4.9",
+    "vite-plugin-electron": "^0.28.8"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1"

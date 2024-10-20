@@ -22,7 +22,11 @@ let indexBridge = {
    * @param {string[]} displayTimes
    */
   setCurrentPrayerTime: (name, displayNames, displayTimes) => {
-    ipcRenderer.send("currentPrayerTime", { name, displayNames, displayTimes });
+    ipcRenderer.send("currentPrayerTime", {
+      name,
+      displayNames,
+      displayTimes,
+    });
   },
 };
 

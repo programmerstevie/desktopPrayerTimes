@@ -36,6 +36,7 @@ const createWindow = () => {
     y: 550,
     webPreferences: {
       preload: path.join(__dirname, "preload", "preload.js"),
+      devTools: !app.isPackaged,
     },
     frame: false,
     resizable: !app.isPackaged,
@@ -46,7 +47,11 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "frontend", "index.html"));
+  if (process.env.VITE_DEV_SERVER_URL) {
+    mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
+  } else {
+    mainWindow.loadFile(path.join(__dirname, "dist/index.html"));
+  }
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools()
@@ -62,13 +67,14 @@ if (app.isPackaged) {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow();
   tray = new Tray(appIcon);
 
   const contextMenu = Menu.buildFromTemplate([{ role: "quit" }]);
 
   tray.setContextMenu(contextMenu);
   tray.setToolTip("Prayer Times");
+
+  createWindow();
 
   app.on("activate", () => {
     // On macOS it's common to re-create a window in the app when the
