@@ -3,15 +3,14 @@
   "version": "1.0.0",
   "productName": "Desktop Prayer Times",
   "description": "A small desktop app that displays the prayer times on your desktop so you have them at a glance",
-  "main": "src/main.js",
+  "main": ".webpack/main",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "electron-forge start",
-    "dev": "cross-env NODE_ENV=development vite",
-    "nodemon-dev": "nodemon --exec electron .",
     "format": "npx prettier . --write",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "publish": "electron-forge publish"
   },
   "author": "Steven Santos",
   "license": "MIT",
@@ -23,16 +22,19 @@
     "@electron-forge/maker-zip": "^7.5.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
     "@electron-forge/plugin-fuses": "^7.5.0",
+    "@electron-forge/plugin-webpack": "^7.5.0",
     "@electron/fuses": "^1.8.0",
+    "@vercel/webpack-asset-relocator-loader": "1.7.3",
     "autoprefixer": "^10.4.20",
-    "cross-env": "^7.0.3",
+    "css-loader": "^6.11.0",
     "electron": "^32.1.2",
-    "electron-reloader": "^1.2.3",
+    "mini-css-extract-plugin": "^2.9.1",
+    "node-loader": "^2.0.0",
     "postcss": "^8.4.47",
+    "postcss-loader": "^8.1.1",
     "prettier": "3.3.3",
-    "tailwindcss": "^3.4.14",
-    "vite": "^5.4.9",
-    "vite-plugin-electron": "^0.28.8"
+    "style-loader": "^3.3.4",
+    "tailwindcss": "^3.4.14"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1"

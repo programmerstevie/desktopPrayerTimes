@@ -1,118 +1,109 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="reset.css" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Prayer Times</title>
 
-    <style>
-      body {
-        background-color: rgb(38, 38, 39);
-        color: rgb(166, 166, 166);
+<head>
+  <meta charset="UTF-8" />
+  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
 
-        font-family: "Lato", sans-serif;
-        font-weight: 400;
-        font-style: normal;
-      }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet" />
+  <title>Prayer Times</title>
 
-      .prayerList {
-        /* margin-top: 20px; */
-      }
+  <style>
+    body {
+      background-color: rgb(38, 38, 39);
+      color: rgb(166, 166, 166);
 
-      .prayerList li {
-        display: flex;
-        border: 2px rgb(39, 43, 43) solid;
-        border-radius: 5px;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 30px;
-        height: 3em;
-      }
+      font-family: "Lato", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+    }
 
-      .time {
-        color: rgb(119, 197, 205);
-      }
+    .prayerList {
+      /* margin-top: 20px; */
+    }
 
-      /* A transparent overlay to capture mouse events (including contextmenu) */
-      .event-capture {
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        pointer-events: all;
-        /* Allow pointer events */
-        -webkit-app-region: no-drag;
-        /* Disable drag for this overlay */
-      }
+    .prayerList li {
+      display: flex;
+      border: 2px rgb(39, 43, 43) solid;
+      border-radius: 5px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      height: 3em;
+    }
 
-      /* .prayerList_elem h2 {} */
+    .time {
+      color: rgb(119, 197, 205);
+    }
 
-      /* .prayerList_elem .time {} */
+    /* A transparent overlay to capture mouse events (including contextmenu) */
+    .event-capture {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: all;
+      /* Allow pointer events */
+      -webkit-app-region: no-drag;
+      /* Disable drag for this overlay */
+    }
 
-      .clickable {
-        -webkit-app-region: none;
-      }
+    /* .prayerList_elem h2 {} */
 
-      .selected {
-        background-color: rgba(0, 255, 242, 0.046);
-      }
-    </style>
-  </head>
+    /* .prayerList_elem .time {} */
 
-  <body>
-    <header class="relative pl-4 pt-3 bg-stone-900 h-[62px]">
-      <h1 class="text-3xl">-----</h1>
-      <aside
-        id="extra_info"
-        class="absolute top-2 right-4 text-xs text-yellow-800"
-      >
-        -----
-      </aside>
-    </header>
-    <ul class="prayerList">
-      <li class="prayerList_elem prayerList_elem--fajr">
-        <h2>Fajr</h2>
-        <div class="time">-:--</div>
-      </li>
-      <li class="prayerList_elem prayerList_elem--sunrise">
-        <h2>Sunrise</h2>
-        <div class="time">-:--</div>
-      </li>
-      <li class="prayerList_elem prayerList_elem--dhuhr">
-        <h2>Dhuhr</h2>
-        <div class="time">-:--</div>
-      </li>
-      <li class="prayerList_elem prayerList_elem--asr">
-        <h2>Asr</h2>
-        <div class="time">-:--</div>
-      </li>
-      <li class="prayerList_elem prayerList_elem--maghrib">
-        <h2>Maghrib</h2>
-        <div class="time">-:--</div>
-      </li>
-      <li class="prayerList_elem prayerList_elem--isha">
-        <h2>Isha</h2>
-        <div class="time">-:--</div>
-      </li>
-      <li class="prayerList_elem prayerList_elem--midnight">
-        <h2>Midnight</h2>
-        <div class="time">-:--</div>
-      </li>
-    </ul>
+    .clickable {
+      -webkit-app-region: none;
+    }
 
-    <script defer src="index.js" type="module"></script>
-  </body>
+    .selected {
+      background-color: rgba(0, 255, 242, 0.046);
+    }
+  </style>
+</head>
+
+<body>
+  <header class="relative pl-4 pt-3 bg-stone-900 h-[62px]">
+    <h1 class="text-3xl">-----</h1>
+    <aside id="extra_info" class="absolute top-2 right-4 text-xs text-yellow-800">
+      -----
+    </aside>
+  </header>
+  <ul class="prayerList">
+    <li class="prayerList_elem prayerList_elem--fajr">
+      <h2>Fajr</h2>
+      <div class="time">-:--</div>
+    </li>
+    <li class="prayerList_elem prayerList_elem--sunrise">
+      <h2>Sunrise</h2>
+      <div class="time">-:--</div>
+    </li>
+    <li class="prayerList_elem prayerList_elem--dhuhr">
+      <h2>Dhuhr</h2>
+      <div class="time">-:--</div>
+    </li>
+    <li class="prayerList_elem prayerList_elem--asr">
+      <h2>Asr</h2>
+      <div class="time">-:--</div>
+    </li>
+    <li class="prayerList_elem prayerList_elem--maghrib">
+      <h2>Maghrib</h2>
+      <div class="time">-:--</div>
+    </li>
+    <li class="prayerList_elem prayerList_elem--isha">
+      <h2>Isha</h2>
+      <div class="time">-:--</div>
+    </li>
+    <li class="prayerList_elem prayerList_elem--midnight">
+      <h2>Midnight</h2>
+      <div class="time">-:--</div>
+    </li>
+  </ul>
+
+  <!-- <script defer src="index.js" type="module"></script> -->
+</body>
+
 </html>

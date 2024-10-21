@@ -1,3 +1,6 @@
+import './reset.css';
+import './styles.css';
+
 /**
  * @typedef {import('../schema.js').PrayerTimesResponse} PrayerTimesResponse
  * @typedef {import('../schema.js').Timings} Timings

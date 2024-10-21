@@ -35,7 +35,7 @@ const createWindow = () => {
     x: 50,
     y: 550,
     webPreferences: {
-      preload: path.join(__dirname, "preload", "preload.js"),
+      preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
       devTools: !app.isPackaged,
     },
     frame: false,
@@ -46,15 +46,7 @@ const createWindow = () => {
     title: "Desktop Prayer Times",
   });
 
-  // and load the index.html of the app.
-  if (process.env.VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(process.env.VITE_DEV_SERVER_URL);
-  } else {
-    mainWindow.loadFile(path.join(__dirname, "dist/index.html"));
-  }
-
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.loadURL(MAIN_WINDOW_WEBPACK_ENTRY);
 };
 
 if (app.isPackaged) {
