@@ -6,6 +6,10 @@ const { app, BrowserWindow } = require("electron");
 // stop squirrel from running app twice
 if (require("electron-squirrel-startup")) app.quit();
 
+const city = "your city"; // TODO: Get this from the user
+const country = "your country"; // TODO: Get this from the user
+const state = "your state"; // TODO: Get this from the user
+
 const path = require("node:path");
 const { ipcMain } = require("electron");
 
@@ -83,10 +87,9 @@ app.on("window-all-closed", () => {
 });
 
 ipcMain.handle("getPrayerTimes", async () => {
-  const url = new URL(`https://api.aladhan.com/v1/timingsByCity/${getToday()}`);
-  url.searchParams.set("country", "US");
-  url.searchParams.set("city", "Pembroke Pines");
-  url.searchParams.set("state", "Florida");
+  const varurl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&state=${state}&date=today`;
+
+  const url = new URL(varurl);
 
   const res = await fetch(url);
 
