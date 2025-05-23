@@ -6,10 +6,6 @@ const { app, BrowserWindow } = require("electron");
 // stop squirrel from running app twice
 if (require("electron-squirrel-startup")) app.quit();
 
-const city = "your city"; // TODO: Get this from the user
-const country = "your country"; // TODO: Get this from the user
-const state = "your state"; // TODO: Get this from the user
-
 const path = require("node:path");
 const { ipcMain } = require("electron");
 
@@ -43,7 +39,7 @@ const createWindow = () => {
       devTools: !app.isPackaged,
     },
     frame: false,
-    resizable: !app.isPackaged,
+    resizable: true,
     alwaysOnTop: true,
     icon: appIcon,
     skipTaskbar: true,
@@ -87,8 +83,15 @@ app.on("window-all-closed", () => {
 });
 
 ipcMain.handle("getPrayerTimes", async () => {
-  const varurl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&state=${state}&date=today`;
-
+  const geoRes = await fetch("http://ip-api.com/json/");
+  const geo = await geoRes.json();
+  
+  const city = geo.city || "";
+  const country = geo.country || "";
+  const region = geo.regionName || "";
+  
+  const varurl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&state=${region}&date=today`;
+  
   const url = new URL(varurl);
 
   const res = await fetch(url);
@@ -139,3 +142,4 @@ ipcMain.on(
     tray.setToolTip(`Prayer Times \n${name}\n----\n${toolTipTimes}`);
   },
 );
+
