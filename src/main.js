@@ -39,7 +39,7 @@ const createWindow = () => {
       devTools: !app.isPackaged,
     },
     frame: false,
-    resizable: !app.isPackaged,
+    resizable: true,
     alwaysOnTop: true,
     icon: appIcon,
     skipTaskbar: true,
@@ -83,10 +83,16 @@ app.on("window-all-closed", () => {
 });
 
 ipcMain.handle("getPrayerTimes", async () => {
-  const url = new URL(`https://api.aladhan.com/v1/timingsByCity/${getToday()}`);
-  url.searchParams.set("country", "US");
-  url.searchParams.set("city", "Pembroke Pines");
-  url.searchParams.set("state", "Florida");
+  const geoRes = await fetch("http://ip-api.com/json/");
+  const geo = await geoRes.json();
+  
+  const city = geo.city || "";
+  const country = geo.country || "";
+  const region = geo.regionName || "";
+  
+  const varurl = `https://api.aladhan.com/v1/timingsByCity?city=${city}&country=${country}&state=${region}&date=today`;
+  
+  const url = new URL(varurl);
 
   const res = await fetch(url);
 
@@ -136,3 +142,4 @@ ipcMain.on(
     tray.setToolTip(`Prayer Times \n${name}\n----\n${toolTipTimes}`);
   },
 );
+
